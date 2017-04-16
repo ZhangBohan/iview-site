@@ -1,15 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
+import Index from '@/views/Index'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       name: 'Hello',
-      component: Hello
+      component: Index,
+      meta: {
+        title: '首页'
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('router to:', to)
+  document.title = to.meta.title
+  next()
+})
+
+export default router
